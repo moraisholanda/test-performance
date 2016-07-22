@@ -1,0 +1,71 @@
+apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion "24.0.0"
+
+    defaultConfig {
+        applicationId "com.holanda.testeperformance"
+        minSdkVersion 16
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+final espressoVersion = '2.2.2'
+final testRunnerRulesVersion = '0.5'
+final dexMakerVersion = '1.4'
+final okHttpVersion = '3.2.0'
+final supportLibVersion = '24.0.0'
+final AAVersion = '4.0.0'
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:24.0.0'
+
+    //graphic
+    compile 'com.jjoe64:graphview:4.1.0'
+
+    apt "org.androidannotations:androidannotations:$AAVersion"
+    compile "org.androidannotations:androidannotations-api:$AAVersion"
+
+    //tests
+
+    androidTestCompile "com.android.support.test.espresso:espresso-core:$espressoVersion"
+    androidTestCompile "com.android.support.test.espresso:espresso-intents:$espressoVersion"
+    androidTestCompile("com.android.support.test.espresso:espresso-contrib:$espressoVersion") {
+        exclude module: 'appcompat-v7'
+        exclude module: 'support-v4'
+        exclude module: 'design'
+        exclude module: 'recyclerview-v7'
+    }
+    androidTestCompile "com.android.support.test:runner:$testRunnerRulesVersion"
+    androidTestCompile "com.android.support.test:rules:$testRunnerRulesVersion"
+
+    androidTestCompile 'br.com.concretesolutions:requestmatcher:1.0.0-alpha2'
+    androidTestCompile "com.squareup.okhttp3:mockwebserver:$okHttpVersion"
+
+    androidTestCompile 'org.mockito:mockito-core:1.10.19'
+    androidTestCompile "com.crittercism.dexmaker:dexmaker:$dexMakerVersion"
+    androidTestCompile "com.crittercism.dexmaker:dexmaker-dx:$dexMakerVersion"
+    androidTestCompile "com.crittercism.dexmaker:dexmaker-mockito:$dexMakerVersion"
+}
+configurations.all {
+    resolutionStrategy {
+        force "com.android.support:support-annotations:$supportLibVersion"
+    }
+}
+apt {
+    arguments {
+        androidManifestFile variant.outputs[0]?.processResources?.manifestFile
+
+    }
+}

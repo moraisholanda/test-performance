@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TestePerformance</string>
+    <string name="button_format">Usando format</string>
+    <string name="button_concat">Usando concat</string>
+    <string name="button_builder">Usando builder</string>
+    <string name="button_buffer">Usando buffer</string>
+</resources>
