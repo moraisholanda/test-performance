@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     @Click(R.id.buttonFormat)
     public void stringFormat(){
         String stFormat = "";
+        System.gc();
         long timeStart = System.currentTimeMillis();
         for(int i = 0; i < COUNT; i ++){
             stFormat.format("%s", "a");
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void stringConcat(){
         String strFinal = "";
+        System.gc();
         long timeStart = System.currentTimeMillis();
         for(int i = 0; i < COUNT; i ++){
             strFinal += "a";
@@ -45,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     @Click(R.id.buttonBuffer)
     public void stringBuffer(){
         StringBuffer strBuffer = new StringBuffer();
+        System.gc();
         long timeStart = System.currentTimeMillis();
         for(int i = 0; i < COUNT; i ++){
             strBuffer.append("a");
@@ -56,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
     @Click(R.id.buttonBuilder)
     public void stringBuilder(){
         StringBuilder strBuilder = new StringBuilder();
+        System.gc();
         long timeStart = System.currentTimeMillis();
 
         for(int i = 0; i < COUNT; i ++){
